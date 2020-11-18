@@ -10,27 +10,27 @@ int main()
 	char str3[50]="1.";
 	char *str4 = NULL;
 	char ch = 'A';
-	if (isupper(ch))
+	/*if (isupper(ch))
 	{
 		printf("OK\n");
 	}
 	else
 	{
 		printf("NO\n");
-	}
+	}*/
 	//printf("%s\n", strncat(str3, str1, 6));
 	//printf("%d\n", strncmp(str1, str2,6));
-	//char *pch = strtok(str1, " ,!");
+	char *pch = strtok(str1, " ");
 	//while (NULL != pch)
 	//{
-	//	printf("%s\n", pch);
-	//	pch = strtok(NULL, " ,!");//strtok 打印一个字符串的多个字符，第一次传参 传 指针  后续传参 传NULL
+		//printf("%s\n", pch);
+		//pch = strtok(NULL, " ,!");//strtok 打印一个字符串的多个字符，第一次传参 传 指针  后续传参 传NULL
 	//}
-	/*while (NULL != pch)
+	/while (NULL != pch)
 	{
 		printf("%s\n", pch);
-		pch = strtok(str1, " ,!");
-	}*/
+		pch = strtok(NULL, " ");
+	}
 	//printf("%s\n", strstr(str1, "w"));//从str1中找 w，返回值是w的地址
 	//printf("%d\n", strlen(str1));
 	//printf("%d\n", strlen(str2));
