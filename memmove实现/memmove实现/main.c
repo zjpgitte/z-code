@@ -8,8 +8,8 @@ void my_memmove(void *_str1, void *_str2,int num)
 	char *str2 = (char *)_str2;
 	if (str1 > str2 && str1 < str2 + num - 1)
 	{
-		str1 = str1 + num - 1;
-		str2 = str2 + num - 1;
+		str1 = str1 + num - 1;//
+		str2 = str2 + num - 1;//让str1和str2都分别指向末尾位置处
 		while (num)
 		{
 			*str1 = *str2;
