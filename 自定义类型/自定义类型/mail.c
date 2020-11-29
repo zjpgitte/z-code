@@ -181,3 +181,44 @@ void NameSortContact(contact person[])
 	}
 	printf("sort success!\n");
 }
+void SaveContact(contact person[])
+{
+	if (NULL == person)
+	{
+		return;
+	}
+	FILE *fp = fopen("contact.txt", "wb");
+	if (NULL == fp)
+	{ 
+		printf("open file error!\n");
+		return;
+	}
+	fwrite(person, sizeof(contact), cnum, fp);
+	fclose(fp);
+	printf("save success!\n");
+}
+void InitContact(contact person[])
+{
+	if (NULL == person)
+	{
+		return;
+	}
+	FILE *fp = fopen("contact.txt", "rb");
+	if (NULL == fp)
+	{
+		printf("open error!\n");
+		return;
+	}
+	int n = 0;
+	cnum = fread(person, sizeof(contact), MAXSIZE, fp);
+	/*while ((n=fread(person, sizeof(contact), 2, fp)) >= 2)
+	{
+		cnum += 2;
+	}
+	if (n == 1)
+	{
+		cnum++;
+	}*/
+	fclose(fp);
+	printf("init success!\n");
+}

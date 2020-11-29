@@ -12,9 +12,9 @@
 int main()
 {
 	contact person[MAXSIZE];
+	InitContact(person);
 	int select = 0;
 	int quit = 0;
-	
 	while (!quit)
 	{
 		Disaply(person);
@@ -39,6 +39,7 @@ int main()
 		case 7:NameSortContact(person);
 			break;
 		case 0:quit = 1;
+			SaveContact(person);
 			break;
 		default:
 			break;

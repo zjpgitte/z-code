@@ -23,5 +23,7 @@ void SearchContact(contact person[]);
 void ReverseContact(contact person[]);
 void EmptyContact(contact person[]);
 void NameSortContact(contact person[]);
+void SaveContact(contact person[]);
+void InitContact(contact person[]);
 #endif
 
