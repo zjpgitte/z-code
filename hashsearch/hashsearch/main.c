@@ -5,6 +5,7 @@
 typedef struct
 {
 	char name[SIZE];
+	char score[SIZE / 6];
 	
 }hashtable_t;
 int hash(char nam[])
@@ -23,11 +24,13 @@ void Input(hashtable_t h[])
 	printf("输入要输入姓名的个数：");
 	int num = 0;
 	scanf("%d", &num);
-	char nam[SIZE];
+	char nam[SIZE]; char scor[SIZE / 6];
 	for (int i = 0; i < num; i++)
 	{
 		printf("输入第%d个姓名", i + 1);
 		scanf("%s", nam);
+		printf("输入其成绩：");
+		scanf("%s", scor);
 		int pos = hash(nam);
 		while (h[pos].name[0] != 0 && pos < SIZE*5)
 		{
@@ -35,9 +38,10 @@ void Input(hashtable_t h[])
 		}
 		if (pos == SIZE * 5)
 		{
-			return -1;
+			return ;
 		}
 		strcpy(h[pos].name, nam);
+		strcpy(h[pos].score, scor);
 	}
 }
 int HashSearch(hashtable_t h[], char nam[])
@@ -65,6 +69,7 @@ int main()
 		if (-1 != pos)
 		{
 			printf("%s 的位置为 %d\n", nam, pos);
+			printf("%s 的成绩为 %s\n", nam, h[pos].score);
 		}
 		else {
 			printf("没找到此人\n");
