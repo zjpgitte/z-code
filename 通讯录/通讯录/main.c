@@ -34,6 +34,9 @@ int main()
 			Save(contact);
 			break;
 		}
+		system("pause");
+		system("cls");
+		
 	}
 
 	system("pause");

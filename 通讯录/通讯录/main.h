@@ -20,7 +20,7 @@ typedef struct
 {
 	int cap;  //最大容量
 	int size; //当前人数
-	person_t person[0];//柔性数组，用于动态边长通讯录
+	person_t person[0];//柔性数组，用于动态变长通讯录
 }contact_t;
 void InitContact(contact_t **contact);
 void InsertPerson(contact_t *contact);

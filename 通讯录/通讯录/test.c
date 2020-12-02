@@ -8,7 +8,7 @@ void InitContact(contact_t **contact)
 		*contact = (contact_t *)malloc(sizeof(contact_t)+sizeof(person_t)*CAP);
 		(*contact)->cap = CAP;
 		(*contact)->size = 0;
-		printf("INIT SUCCESS!\n");
+		printf("INIT SUCCESS!\n");//键盘初始化数据
 	}
 	else
 	{
@@ -19,7 +19,7 @@ void InitContact(contact_t **contact)
 		(*contact)->size = fread((*contact)->person, sizeof(person_t), p.cap, fp);
 		(*contact)->cap = p.cap;
 		fclose(fp);
-		printf("INIT SUCCESS!\n");
+		printf("INIT SUCCESS!\n");//从文件初始化数据
 	}
 }
 static int IsFull(contact_t *contact)
@@ -42,7 +42,7 @@ static int Inc(contact_t **contact)
 	}
 	*contact = p;
 	(*contact)->cap = num + INC;
-	printf("INC end >>>>>\n");
+	printf("INC end >>>>>\n");//通讯录动态增大
 	return 1;
 }
 void InsertPerson(contact_t **contact)
@@ -212,7 +212,7 @@ void SortContact(contact_t *contact)
 		}
 		if (tag == 1)
 		{
-			return;
+			break;
 		}
 	}
 	printf("sort success!\n");
