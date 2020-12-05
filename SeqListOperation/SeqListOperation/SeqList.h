@@ -13,6 +13,7 @@ typedef struct SeqList
 	int size;
 	int cap;
 }SeqList;
+//顺序表的初始化、尾插、尾删、前插、前删、中间插、中间删、
 void InitSeqList(SeqList **L);
 void SeqListPushBack(SeqList **L, int x);
 void SeqListPopBack(SeqList *L);
