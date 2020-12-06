@@ -39,7 +39,7 @@ int* addToArrayForm(int* A, int ASize, int K, int* returnSize){
 		}
 
 	}
-
+//这种情况下会发生越界；
 int main()
 {
 	int A[] = { 3, 8, 0, 3, 0, 2, 7, 0, 7, 6, 4, 9, 9, 1, 7, 6, 6, 1, 6, 4};
