@@ -18,4 +18,10 @@ void SLlistPopBack(SListNode **pplist);
 void SLlistPushFront(SListNode **pplist, int x);
 void SLlistPopFront(SListNode **pplist);
 SListNode* SLlistSearch(SListNode *plist, int x);
+void SListInsertAfter(SListNode* pos,int x);
+// 单链表删除pos位置之后的值
+// 分析思考为什么不删除pos位置？
+void SListEraseAfter(SListNode* pos);
+// 单链表的销毁
+void SListDestory(SListNode* plist);
 

@@ -110,8 +110,8 @@ void SLlistPopFront(SListNode **pplist)
 SListNode* SLlistSearch(SListNode *plist, int x)
 {
 	//1.plist为空
-	//2.有
-	//3.没有
+	//2.找到
+	//3.没找到
 	if (plist == NULL)
 	{
 		return NULL;
@@ -130,3 +130,40 @@ SListNode* SLlistSearch(SListNode *plist, int x)
 	}
 	return NULL;
 }
+void SListInsertAfter(SListNode* pos, int x)
+{
+	//1.pos 为空不插入
+	//2.
+	if (pos == NULL)
+	{
+		return;
+	}
+	SListNode *newnode = BuySLlistNewNode();
+	newnode->a = x;
+	newnode->next = pos->next;
+	pos->next = newnode;
+
+}
+void SListEraseAfter(SListNode* pos)
+{
+	if (pos == NULL)
+	{
+		return;
+	}
+	SListNode *behind = pos->next;
+	pos->next = behind->next;
+	free(behind);
+}
+void SListDestory(SListNode* plist)
+{
+	if (plist == NULL)
+	{
+		return;
+	}
+	SListNode *cur = plist;
+	while (cur)
+	{
+		free(cur);
+	}
+}
+
