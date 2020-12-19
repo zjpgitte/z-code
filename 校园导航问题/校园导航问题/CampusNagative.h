@@ -32,4 +32,4 @@ void SearchVertexDate(AdjMartrix *G);//查询一个顶点的信息
 void SearchArcDate(AdjMartrix *G);//查询一个边的信息(最短路径)
 void Menu();
 void DisaplyArc(AdjMartrix *G);//显示弧的信息
-void DevelopOption(AdjMartrix *G);
+void DevelopOption(AdjMartrix *G);//开发人员选项

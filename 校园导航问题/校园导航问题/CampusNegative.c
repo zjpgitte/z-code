@@ -4,11 +4,7 @@ typedef struct SeqListNode
 	int path[SIZE];
 	int len;
 }SeqListNode;
-//typedef struct SLinklistNode
-//{
-//	int num;
-//	struct SLinklistNode *next;
-//}SLinklistNode;
+
 void InitCampusGraph(AdjMartrix *G);//初始化图
 static void InitVertex(AdjMartrix *G);//初始化顶点
 void InitArc(AdjMartrix *G);//初始化边
