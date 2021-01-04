@@ -16,6 +16,11 @@ void testQueue1()
 		QueuePop(&q);
 	}
 	QueueDestroy(&q);
+	while (!QueueEmpty(&q))
+	{
+		printf("%d ", QueueFront(&q));
+		QueuePop(&q);
+	}
 }
 
 int main()

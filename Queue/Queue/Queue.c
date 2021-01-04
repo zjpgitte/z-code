@@ -68,13 +68,15 @@ int QueueSize(Queue *pq)
 		size++;
 		cur = cur->_next;
 	}
+	return size;
+
 }
 //Ïú»Ù
 void QueueDestroy(Queue *pq)
 {
 	assert(pq);
-	QueueNode *cur = pq->_head;
-	while (cur)
+	
+	while (pq->_head)
 	{
 		QueueNode *del = pq->_head;
 		pq->_head = pq->_head->_next;
