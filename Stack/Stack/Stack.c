@@ -51,6 +51,11 @@ int StackEmpty(Stack *st)
 	return st->Top == 0 ? 1 : 0;
 	//return st->Top;
 }
+int StackSize(Stack *st)
+{
+	assert(st);
+	return st->Top;
+}
 //Ïú»Ù
 void StackDestroy(Stack *st)
 {

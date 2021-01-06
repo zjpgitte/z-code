@@ -23,5 +23,7 @@ void StackPop(Stack *st);
 STDataType StackTop(Stack *st);
 //判空
 int StackEmpty(Stack *st);
+//求元素个数
+int StackSize(Stack *st);
 //销毁
 void StackDestroy(Stack *st);
