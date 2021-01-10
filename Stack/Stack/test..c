@@ -11,7 +11,6 @@ void TestStack1()
 	StackPush(&st, 3);
 	StackPush(&st, 4);
 	StackPush(&st, 5);
-	printf("\n%d ", StackSize(&st));
 
 	while (!StackEmpty(&st))
 	{
