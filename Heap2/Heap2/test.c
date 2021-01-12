@@ -14,10 +14,16 @@ void Test()
 	HeapSort(a, size);
 	
 }
+void TestTopk()
+{
+	int a[] = { 27, 15, 19, 18, 28, 34, 65, 49, 25, 37 };
+	int size = sizeof(a) / sizeof(a[0]);
+	PrintTopK(a, size, 3);
+}
 int main()
 {
-	Test();
-
+	//Test();
+    TestTopk();
 	system("pause");
 	return 0;
 }

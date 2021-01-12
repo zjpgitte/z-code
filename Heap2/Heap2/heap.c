@@ -74,10 +74,10 @@ void HeapPop(Heap *php)
 	AdjustDown(php->_data, php->_size, 0);
 }
 //取堆顶元素
-HPDataType HeapTop(Heap *php)
+HPDataType HeapTop(HPDataType *a)
 {
-	assert(php);
-	return php->_data[0];
+	assert(a);
+	return a[0];
 }
 //堆的元素个数
 int Heapsize(Heap *php)
@@ -118,11 +118,11 @@ void AdjustDown(int *a, int asize, int root)//root是要调整的数的树根
 	int child = 2 * parent + 1;
 	while (child < asize)//循环的最大次数是树的高度次时间复杂度是O(logN)
 	{
-		if (child +1 < asize && a[child + 1] > a[child])
+		if (child +1 < asize && a[child + 1] < a[child])
 		{
 			child++;
 		}//child是值较小的那个孩子
-		if (a[child] > a[parent])
+		if (a[child] < a[parent])
 		{
 			Swap(&a[child], &a[parent]);
 			parent = child;
@@ -153,4 +153,33 @@ void AdjustUp(int *a, int asize, int leaf)
 			break;
 		}
 	}
+}
+//TopK问题
+void PrintTopK(int* a, int n, int k)
+{
+	assert(a);
+	for (int i = (k - 1 - 1) / 2; i >= 0;--i)
+	{
+		AdjustDown(a, k, i);
+	}//将数组a的前K个元素建成小堆
+	printf("排序前：");
+	for (int i = 0; i < k; ++i)
+	{
+		printf("%d ", a[i]);
+	}
+	printf("\n");
+	for (int i = k; i < n;++i)
+	{
+		if (a[i] > a[0])
+		{
+			Swap(&a[i], &a[0]);
+			AdjustDown(a, k, 0);
+		}
+	}
+	printf("排序后:");
+	for (int i = 0; i < k; ++i)
+	{
+		printf("%d ", a[i]);
+	}
+	printf("\n");
 }
