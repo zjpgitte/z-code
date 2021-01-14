@@ -14,7 +14,7 @@ typedef struct BinaryTreeNode
 }BTNode;
 
 //树的创建
-void BinaryTreeCreat(BTNode **root);
+void BinaryTreeCreat(BTNode **root,BTDataType **str);
 
 //树的先序遍历
 void BinaryTreePreOrder(BTNode *root);

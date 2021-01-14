@@ -2,8 +2,10 @@
 
 void Test()
 {
+	BTDataType str[] = "ABD..E..C..";
+	char *ps = str;
 	BTNode *root = NULL;
-	BinaryTreeCreat(&root);
+	BinaryTreeCreat(&root,&(str+1));//root和ps都传二级指针
 	BinaryTreePreOrder(root);
 	printf("\n");
 	BinaryTreeInOrder(root);

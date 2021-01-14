@@ -1,19 +1,21 @@
 #include "binarytree.h"
 
 //树的创建
-void BinaryTreeCreat(BTNode **root)
+void BinaryTreeCreat(BTNode **root,BTDataType **str)
 {
-	char ch = getchar();
-	if (ch == '.')
-	{
-		return;
-	}
-	*root = (BTNode *)malloc(sizeof(BTNode));
-	(*root)->_data = ch;
-	(*root)->_left = NULL;
-	(*root)->_right = NULL;
-	BinaryTreeCreat(&(*root)->_left);
-	BinaryTreeCreat(&(*root)->_right);
+		if (**str == '.' )
+		{
+			(*str)++;
+			return;
+		}
+		*root = (BTNode *)malloc(sizeof(BTNode));
+		(*root)->_data = **str;
+		(*root)->_left = NULL;
+		(*root)->_right = NULL;
+		(*str)++;
+		BinaryTreeCreat(&(*root)->_left,str);
+		BinaryTreeCreat(&(*root)->_right,str);
+	
 }
 
 //树的先序遍历
