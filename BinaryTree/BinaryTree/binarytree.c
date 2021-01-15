@@ -3,11 +3,15 @@
 //树的创建
 void BinaryTreeCreat(BTNode **root,BTDataType **str)
 {
-		if (**str == '.' )
+		//如果输入的是'.'表明当前结点为NULL则不创建节点
+		if (**str == '.' )//接一次引用拿到当前元素的指针，解两次引用拿到数组当前元素
 		{
 			(*str)++;
 			return;
 		}
+
+
+		//当元素不是NULL时创建节点，放入数组的当前元素
 		*root = (BTNode *)malloc(sizeof(BTNode));
 		(*root)->_data = **str;
 		(*root)->_left = NULL;
