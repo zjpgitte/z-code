@@ -102,3 +102,77 @@ int BinaryTreeDepth(BTNode *root)
 	}
 	return 1+maxDepth;
 }
+
+void TravelKLevel(BTNode *root, int cur, int *kSize,int k)
+{
+	if (cur > k)
+	{
+		return;
+	}
+	else if (cur < k)
+	{
+		cur++;
+		TravelKLevel(root->_left, cur, kSize, k);
+		TravelKLevel(root->_right, cur, kSize, k);
+	}
+	else
+	{
+		if (root != NULL)
+		{
+			(*kSize)++;
+		}
+	}
+}
+
+// 二叉树第k层节点个数
+int BinaryTreeLevelKSize(BTNode* root, int k)
+{
+	int kSize = 0;
+	int cur = 1;
+	TravelKLevel(root, cur, &kSize,k);
+	return kSize;
+}
+
+void TravelFind(BTNode *root, BTDataType x, BTNode **ret)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+	if (root->_data == x)
+	{
+		*ret = root;
+		return;
+	}
+	else
+	{
+		TravelFind(root->_left, x, ret);
+		TravelFind(root->_right, x, ret);
+	}
+}
+
+// 二叉树查找值为x的节点
+BTNode* BinaryTreeFind(BTNode* root, BTDataType x)
+{
+	BTNode *ret = NULL;
+	TravelFind(root, x, &ret);
+	return ret;
+}
+
+// 层序遍历
+void BinaryTreeLevelOrder(BTNode* root);
+
+// 判断二叉树是否是完全二叉树
+int BinaryTreeComplete(BTNode* root);
+
+// 二叉树销毁
+void BinaryTreeDestory(BTNode** root)
+{
+	if ((*root) == NULL)
+	{
+		return;
+	}
+	BinaryTreeDestory(&(*root)->_left);
+	BinaryTreeDestory(&(*root)->_right);
+	free(*root);
+}

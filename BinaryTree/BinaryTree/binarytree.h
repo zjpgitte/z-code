@@ -25,6 +25,7 @@ void BinaryTreeInOrder(BTNode *root);
 //树的后序遍历
 void BinaryTreePostOrder(BTNode *root);
 
+
 //树的节点个数
 int BinaryTreeSize(BTNode *root);
 
@@ -33,3 +34,18 @@ int BinaryTreeLeafSize(BTNode *root);
 
 //树的深度
 int BinaryTreeDepth(BTNode *root);
+
+// 二叉树第k层节点个数
+int BinaryTreeLevelKSize(BTNode* root, int k);
+
+// 二叉树查找值为x的节点
+BTNode* BinaryTreeFind(BTNode* root, BTDataType x);
+
+// 层序遍历
+void BinaryTreeLevelOrder(BTNode* root);
+
+// 判断二叉树是否是完全二叉树
+int BinaryTreeComplete(BTNode* root);
+
+// 二叉树销毁
+void BinaryTreeDestory(BTNode** root);
