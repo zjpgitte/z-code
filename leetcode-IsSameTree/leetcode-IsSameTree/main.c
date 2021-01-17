@@ -29,46 +29,61 @@ void BinaryTreeCreat(BinaryTreeNode **root, int **pa)
 
 }
 
-void TravelJudge(BinaryTreeNode *p, BinaryTreeNode *q, int *tag)
-{
-	//p,q均不存在。p和q均为空结点，不改变tag值
-	if (p == NULL && q == NULL)
-	{
-		return;
-	}
-
-	//p和q只存在一个结点，或者p,q结点均存在但是值不相等，将tag置1
-	else if (p && !q || q && !p || p->val != q->val)
-	{
-		*tag = 1;
-		return;
-	}
-
-	//p,q均存在且值相等
-	else
-	{
-		TravelJudge(p->left, q->left, tag);
-		TravelJudge(p->right, q->right, tag);
-	}
-
-}
+//void TravelJudge(BinaryTreeNode *p, BinaryTreeNode *q, int *tag)
+//{
+//	//p,q均不存在。p和q均为空结点，不改变tag值
+//	if (p == NULL && q == NULL)
+//	{
+//		return;
+//	}
+//
+//	//p和q只存在一个结点，或者p,q结点均存在但是值不相等，将tag置1
+//	else if (p && !q || q && !p || p->val != q->val)
+//	{
+//		*tag = 1;
+//		return;
+//	}
+//
+//	//p,q均存在且值相等
+//	else
+//	{
+//		TravelJudge(p->left, q->left, tag);
+//		TravelJudge(p->right, q->right, tag);
+//	}
+//
+//}
+//
+//int IsSameTree(BinaryTreeNode *p, BinaryTreeNode *q)
+//{
+//	int tag = 0;
+//
+//	//遍历判断p,q各个节点值是否相等，若不相等将tag值1，若相等 tag 不变
+//	TravelJudge(p, q,&tag);
+//
+//	
+//	if (tag == 0)
+//	{
+//		return 1;
+//	}
+//	else
+//	{
+//		return 0;
+//	}
+//}
 
 int IsSameTree(BinaryTreeNode *p, BinaryTreeNode *q)
 {
-	int tag = 0;
-
-	//遍历判断p,q各个节点值是否相等，若不相等将tag值1，若相等 tag 不变
-	TravelJudge(p, q,&tag);
-
-	
-	if (tag == 0)
+	if (p == NULL && q == NULL)
 	{
 		return 1;
 	}
-	else
+
+	if (p && !q || q && !p || p->val != q->val)
 	{
 		return 0;
 	}
+
+	return IsSameTree(p->left, q->left) && IsSameTree(p->right, q->right);
 }
 
 int main()
