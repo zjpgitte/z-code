@@ -1,5 +1,5 @@
-#include<stdio.h>
-
+#include <stdio.h>
+#include <windows.h>
 
 // Definition for a binary tree node.
 typedef struct TreeNode {
@@ -47,28 +47,28 @@ void BinaryTreeTravel(struct TreeNode* root, int val, int *tag)
 	}
 }
 
-int isUnivalTree(struct TreeNode* root){
-	if (root == NULL)
-	{
-		return false;
-	}
-
-	int val = root->val;//记录根节点的值，判断其它结点的值和它是否相等
-	int tag = 0;//辅助判断标志位
-
-	BinaryTreeTravel(root->left, val, &tag);//遍历左子树
-	BinaryTreeTravel(root->right, val, &tag);//遍历右子树
-
-	if (tag == 0)//
-	{
-		return true;
-	}
-	else//tag == 1
-	{
-		return false;
-	}
-}
-
+//int isUnivalTree(struct TreeNode* root){
+//	if (root == NULL)
+//	{
+//		return false;
+//	}
+//
+//	int val = root->val;//记录根节点的值，判断其它结点的值和它是否相等
+//	int tag = 0;//辅助判断标志位
+//
+//	BinaryTreeTravel(root->left, val, &tag);//遍历左子树
+//	BinaryTreeTravel(root->right, val, &tag);//遍历右子树
+//
+//	if (tag == 0)//
+//	{
+//		return true;
+//	}
+//	else//tag == 1
+//	{
+//		return false;
+//	}
+//}
+//
 void BinaryTreePrint(TreeNode *root)
 {
 	if (root == NULL)
@@ -78,6 +78,36 @@ void BinaryTreePrint(TreeNode *root)
 	printf("%d ", root->val);
 	BinaryTreePrint(root->left);
 	BinaryTreePrint(root->right);
+}
+
+
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     struct TreeNode *left;
+*     struct TreeNode *right;
+* };
+*/
+//当左右孩子结点存在，但是和根节点的值不相等时，返回false
+
+int isUnivalTree(struct TreeNode* root){
+	if (root == NULL)
+	{
+		return true;
+	}
+	//左孩子存在但值不相等
+	if (root->left && root->val != root->left->val)
+	{
+		return false;
+	}
+	//右孩子存在但值不相等
+	if (root->right && root->val != root->right->val)
+	{
+		return false;
+	}
+	//判断左右子树是否为单值二叉树
+	return isUnivalTree(root->left) && isUnivalTree(root->right);
 }
 
 int main()
