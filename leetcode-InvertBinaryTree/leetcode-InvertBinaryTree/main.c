@@ -26,26 +26,45 @@ void BinaryTreeCreat(BinaryTreeNode **root, int *arr, int *i)
 	BinaryTreeCreat(&(*root)->right, arr, i);
 
 }
-//判断是否为翻转二叉树:
-void InvertBinaryTree(BinaryTreeNode *root)
-{
-	//空节点课叶子结点不需要翻转
-	if (root == NULL || root->left == NULL && root->right == NULL)
+//翻转一颗二叉树:
+//思路一:
+//void InvertBinaryTree(BinaryTreeNode *root)
+//{
+//	//空节点课叶子结点不需要翻转
+//	if (root == NULL || root->left == NULL && root->right == NULL)
+//	{
+//		return;
+//	}
+//
+//	//交换左右子树位置
+//	BinaryTreeNode *temp = root->left;
+//	root->left = root->right;
+//	root->right = temp;
+//
+//	//翻转左子树
+//	InvertBinaryTree(root->left);
+//	//翻转右子树
+//	InvertBinaryTree(root->right);
+//
+//}
+
+//思路二:
+BinaryTreeNode* InvertBinaryTree(BinaryTreeNode * root){
+	//空节点不翻转
+	if (root == NULL)
 	{
-		return;
+		return NULL;
 	}
 
-	//交换左右子树位置
-	BinaryTreeNode *temp = root->left;
-	root->left = root->right;
-	root->right = temp;
-
-	//翻转左子树
-	InvertBinaryTree(root->left);
-	//翻转右子树
-	InvertBinaryTree(root->right);
+	//翻转左右子树，再交换左右子树的位置
+	BinaryTreeNode* right = root->right;
+	root->right = InvertBinaryTree(root->left);
+	root->left = InvertBinaryTree(right);
+	return root;
 
 }
+
+
 
 void Print(BinaryTreeNode *root)
 {
@@ -72,7 +91,7 @@ int main()
 	Print(root); printf("\n");
 
 	//翻转一颗二叉树
-	InvertBinaryTree(root);
+	root = InvertBinaryTree(root);
 	Print(root);
 	system("pause");
 	return 0;
