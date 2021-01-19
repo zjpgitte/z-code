@@ -1,4 +1,5 @@
 #include "binarytree.h"
+#include "Queue.h"
 
 //树的创建
 void BinaryTreeCreat(BTNode **root,BTDataType **str)
@@ -103,67 +104,122 @@ int BinaryTreeDepth(BTNode *root)
 	return 1+maxDepth;
 }
 
-void TravelKLevel(BTNode *root, int cur, int *kSize,int k)
-{
-	if (cur > k)
-	{
-		return;
-	}
-	else if (cur < k)
-	{
-		cur++;
-		TravelKLevel(root->_left, cur, kSize, k);
-		TravelKLevel(root->_right, cur, kSize, k);
-	}
-	else
-	{
-		if (root != NULL)
-		{
-			(*kSize)++;
-		}
-	}
-}
 
 // 二叉树第k层节点个数
 int BinaryTreeLevelKSize(BTNode* root, int k)
 {
-	int kSize = 0;
-	int cur = 1;
-	TravelKLevel(root, cur, &kSize,k);
-	return kSize;
-}
-
-void TravelFind(BTNode *root, BTDataType x, BTNode **ret)
-{
 	if (root == NULL)
 	{
-		return;
+		return 0;
 	}
-	if (root->_data == x)
+	if (k == 1)
 	{
-		*ret = root;
-		return;
+		return 1;
 	}
-	else
-	{
-		TravelFind(root->_left, x, ret);
-		TravelFind(root->_right, x, ret);
-	}
+	return BinaryTreeLevelKSize(root->_left, k - 1) + BinaryTreeLevelKSize(root->_right, k - 1);
 }
 
 // 二叉树查找值为x的节点
 BTNode* BinaryTreeFind(BTNode* root, BTDataType x)
 {
-	BTNode *ret = NULL;
-	TravelFind(root, x, &ret);
-	return ret;
+	if (root == NULL)
+	{
+		return NULL;
+	}
+
+	//1.当前节点就是要查找的结点
+	if (root->_data == x)
+	{
+		return root;
+	}
+
+	//2.当前节点不是，到左子树找
+	BTNode *left = BinaryTreeFind(root->_left,x);
+	if (left != NULL)
+	{
+		return left;
+	}
+
+	//3.左子树没找到，到右子树找
+	BTNode *right = BinaryTreeFind(root->_right, x);
+	if (right != NULL)
+	{
+		return right;
+	}
+
+	//左右子树都没找到返回NULL
+	return NULL;
+
 }
 
 // 层序遍历
-void BinaryTreeLevelOrder(BTNode* root);
+//让根节点入队，然后出队，之后再让根结点的左右孩子入队,NULL结点不入队
+void BinaryTreeLevelOrder(BTNode* root)
+{
+	if (root == NULL)
+	{
+		return;
+	}
+
+	Queue q;
+	QueueInit(&q);
+	QueuePush(&q, root);
+
+	while (!QueueEmpty(&q))
+	{
+		//当前根节点出队
+		BTNode *cur = QueueFront(&q);
+		QueuePop(&q);
+		printf("%c ", cur->_data);
+		//当前根节点的左右孩子入队
+		if (cur->_left)
+		{
+			QueuePush(&q, cur->_left);
+		}
+		if (cur->_right)
+		{
+			QueuePush(&q, cur->_right);
+		}
+	}
+	printf("\n");
+
+
+}
 
 // 判断二叉树是否是完全二叉树
-int BinaryTreeComplete(BTNode* root);
+int BinaryTreeComplete(BTNode* root)
+{
+	if (root == NULL)
+	{
+		return 1;
+	}
+
+	Queue q;
+	QueueInit(&q);
+	QueuePush(&q, root);
+	while (!QueueEmpty(&q))
+	{
+		BTNode *cur = QueueFront(&q);
+		QueuePop(&q);
+		if (cur == NULL)
+		{
+			break;
+		}
+		QueuePush(&q, cur->_left);
+		QueuePush(&q, cur->_right);
+	}
+
+	while (!QueueEmpty(&q))
+	{
+		if (QueueFront(&q) != NULL)
+		{
+			return 0;
+		}
+		QueuePop(&q);
+	}
+	return 1;
+
+}
 
 // 二叉树销毁
 void BinaryTreeDestory(BTNode** root)

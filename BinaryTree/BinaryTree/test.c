@@ -17,6 +17,8 @@ void Test()
 	printf("TreeDepth:%d\n", BinaryTreeDepth(root));
 	printf("3 level size:%d\n", BinaryTreeLevelKSize(root, 3));
 	printf("%c\n", BinaryTreeFind(root, 'D')->_data);
+	BinaryTreeLevelOrder(root);
+	printf("%d\n", BinaryTreeComplete(root));
 	BinaryTreeDestory(&root);
 }
 
