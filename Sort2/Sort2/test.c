@@ -10,7 +10,8 @@ int main()
 	//ShellSort(a, size);
 	//SelectSort(a, size);
 	//HeapSort(a, size);
-	BubbleSort(a, size);
+	//BubbleSort(a, size);
+	QuickSort(a, 0, size - 1);
 	PrintArray(a, size);
 
 	system("pause");

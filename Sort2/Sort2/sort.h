@@ -22,3 +22,6 @@ void AdjustDown(int *a, int n, int root);
 
 //Ã°ÅİËã·¨
 void BubbleSort(int *a, int n);
+
+//¿ìËÙÅÅĞò
+void QuickSort(int *a, int left, int right);

@@ -171,3 +171,118 @@ void BubbleSort(int *a, int n)
 	}
 	
 }
+int GetMidIndex(int *a, int left, int right)
+{
+	int mid = (left + right) / 2;
+	if (a[left] < a[mid])
+	{
+		if (a[right] < a[mid])
+		{
+			if (a[right] > a[left])
+			{
+				return right;
+			}
+			else
+			{
+				return left;
+			}
+		}
+		else
+		{
+			return mid;
+		}
+	}
+	else
+	{
+		if (a[right] > a[mid])
+		{
+			if (a[left] > a[right])
+			{
+				return right;
+			}
+			else
+			{
+				return left;
+			}
+		}
+		else
+		{
+			return mid;
+		}
+	}
+}
+int PartSort1(int *a, int left, int right)
+{
+	int midIndex = GetMidIndex(a, left, right);
+	Swap(&a[midIndex], &a[right]);
+	int keyIndex = right;
+	while (left < right)
+	{
+		//从左往右找比key大的
+		while (left < right && a[left] <= a[keyIndex])
+		{
+			left++;
+		}
+		//从右往左找比key小的
+		while (left < right && a[right] >= a[keyIndex])
+		{
+			right--;
+		}
+		Swap(&a[left], &a[right]);
+	}
+	Swap(&a[left], &a[keyIndex]);
+	return keyIndex;
+}
+int PartSort2(int *a, int left, int right)
+{
+	int key = a[right];
+	while (left < right)
+	{
+		while (left < right && a[left] <= key)
+		{
+			left++;
+		}
+		a[right] = a[left];
+		while (left < right && a[right] >= key)
+		{
+			right--;
+		}
+		a[left] = a[right];
+	}
+	a[left] = key;
+	return left;
+}
+int PartSort3(int *a, int left, int right)
+{
+	int keyIndex = right;
+	int prev = left - 1;
+	int cur = left;
+	while (cur < right)
+	{
+		if (a[cur] < a[keyIndex] && ++prev != cur)
+		{
+			Swap(&a[cur], &a[prev]);
+		}
+		cur++;
+	}
+	Swap(&a[++prev], &a[keyIndex]);
+	return prev;
+}
+//快速排序   排区间[left,right]中的数
+void QuickSort(int *a, int left, int right)
+{
+	//当只有一个元素时排序结束
+	if (left - right + 1 > 4)
+	{
+		int mid = PartSort3(a, left, right);
+		//将[left,mid-1]排成有序
+		QuickSort(a, left, mid - 1);
+		//将[mid+1,right]排成有序
+		QuickSort(a, mid + 1, right);
+	}
+	else
+	{
+		InsertSort(a + left, right - left + 1);
+	}
+	
+}
