@@ -393,10 +393,50 @@ void _MergeSort(int *a, int left, int right,int *temp)
 	PrintArray(a + left, right - left + 1);
 }
 
+//归并递归排序
+//归并排序的时间复杂度：O(N*logN)
+//可以认为最后一次合并的时间复杂度O(N),倒数第二三次的时间复杂度为O(N/2)，那么第二层的时间复杂的为O(N)
+//递归树的层数为O(logN)，则总的时间复杂度为O(N*logN)
+
 void MergeSort(int *a, int n)
 {
 	int *temp = malloc(sizeof(int)*n);
 
 	_MergeSort(a, 0, n - 1,temp);
+
+}
+
+//归并非递归排序
+void MergeSortNonR(int *a, int n)
+{
+	int *temp = malloc(sizeof(int)*n);
+	int gap = 1;
+	while (gap < n)
+	{
+		for (int i = 0; i < n; i += 2 * gap)
+		{
+			int begin1 = i, end1 = i + gap - 1;
+			int begin2 = i + gap, end2 = i + 2 * gap - 1;
+			
+			//合并的时候是进行两个数组的合并，如果第二个数组的范围不存在(即第二个数组不存在)则不进行合并 
+			//这种情况下第一个数组的范围的右区间end2可能存在也可能不存在
+			//但是不论它是否存在，只要第二个数组不存在就不进行合并
+			if (begin2 >= n)
+			{
+				break;
+			}
+
+			//走到这说明第二个数组的左区间存在右区间不存在,此时第二个数组存在仅仅是元素的个数与第一个数组不同
+			//需要修正右区间的大小为n-1保证它不越界，然后再和第一个数组合并 。合并的时候两个数组元素的个数不一定相同
+			if (end2 >= n)
+			{
+				end2 = n-1;
+			}
+			
+			SortArray(a, begin1, end1, begin2, end2, temp);
+		}
+		gap *= 2;
+	}
+	
 
 }

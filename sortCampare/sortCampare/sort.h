@@ -27,4 +27,7 @@ void QuickSort(int *a, int n);
 void QSortNonR(int *a, int left, int right);
 
 //归并排序
+//归并排序的时间复杂度为O(N*logN)
 void MergeSort(int *a, int n);
+
+void MergeSortNonR(int *a, int n);

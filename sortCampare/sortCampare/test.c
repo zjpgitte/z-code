@@ -23,7 +23,7 @@ void PrintArray(int *a, int size)
 int main()
 {
 	//int a[] = { 5, 2, 4, 6, 1, 3 };
-	int a[] = { 5, 2, 4, 6,1,3};
+	int a[] = { 5, 2, 4, 6,3,1};
 	int size = sizeof(a) / sizeof(a[0]);
 
 	printf("≈≈–Ú«∞:");
@@ -34,7 +34,8 @@ int main()
 	//HeapSort(a, size);
 	//BubbleSort(a, size);
 	//QuickSort(a, size);
-	MergeSort(a, size);
+	//MergeSort(a, size);
+	MergeSortNonR(a, size);
 	printf("≈≈–Ú∫Û:");
 	PrintArray(a, size);//¥Ú”°≈≈–Ú∫Û
 
