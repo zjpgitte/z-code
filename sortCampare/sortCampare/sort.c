@@ -390,7 +390,6 @@ void _MergeSort(int *a, int left, int right,int *temp)
 	int begin1 = left, end1 = mid;
 	int begin2 = mid + 1, end2 = right;
 	SortArray(a, begin1, end1, begin2, end2, temp);
-	PrintArray(a + left, right - left + 1);
 }
 
 //归并递归排序
@@ -433,6 +432,7 @@ void MergeSortNonR(int *a, int n)
 				end2 = n-1;
 			}
 			
+			//两个区间进行合并排序
 			SortArray(a, begin1, end1, begin2, end2, temp);
 		}
 		gap *= 2;
