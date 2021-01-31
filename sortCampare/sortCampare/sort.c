@@ -166,6 +166,8 @@ void BubbleSort(int *a, int n)
 		}
 	}
 }
+//将数组中取三个数进行比较，最后返回数值大小不是最大也不是最小的那个元素的下标
+//这三个数分别是 a[left] a[right] a[(left+right) / 2]
 int GetMidIndex(int *a, int left, int right)
 {
 	int mid = (left + right) / 2;
@@ -209,14 +211,19 @@ int GetMidIndex(int *a, int left, int right)
 //左右指针法
 int PartSort1(int *a, int left, int right)
 {
-	//三数取中,保证right位置处的元素不是最大或最小的
+	//三数取中,保证right位置处的元素不是最大或最小的，避免了排好序后key的左右区间只存在一个。
+	//最终说时间复杂度时会解释.
 	int mid = GetMidIndex(a, left, right);
 	Swap(&a[mid], &a[right]);
 
+	//key每次都取数组的最后一个元素
 	int keyIndex = right;
+
 	//从左往右找比key大的，从右往左找比key小的,交换两者位置
 	while (left < right)
 	{
+		//这里只能时left先走，right后走这样才能保证相遇位置的元素是大于key的
+		//最终交换后这个元素就出现再key右边.
 		while (left < right && a[left] <= a[keyIndex])
 		{
 			left++;
@@ -225,20 +232,24 @@ int PartSort1(int *a, int left, int right)
 		{
 			right--;
 		}
+
+		//找到后交换
 		Swap(&a[left], &a[right]);
 	}
 
-	//将key放到相遇位置
+	//将key和相遇位置元素交换
 	Swap(&a[left], &a[keyIndex]);
 	return left;
 }
 //挖坑法
 int PartSort2(int *a, int left, int right)
 {
-	//三数取中,保证right位置处的元素不是最大或最小的
+	//三数取中。返回数值不是最大也不是最小的那个元素的下标，将它换到right位置
 	int mid = GetMidIndex(a, left, right);
 	Swap(&a[mid], &a[right]);
-	int key = a[right];//把最右边的元素保存这样最右边就是一个坑
+
+	int key = a[right];//取right位置元素为key
+
 	while (left < right)
 	{
 		//从左边开始找比key大的
@@ -257,6 +268,7 @@ int PartSort2(int *a, int left, int right)
 		//找到后填到左边的坑，这样右边又形成了一个坑
 		a[left] = a[right];
 	}
+
 	//key填到最后left和rigright相遇位置的坑
 	a[left] = key;
 	return left;
@@ -267,30 +279,62 @@ int PartSort3(int *a, int left, int right)
 	//三数取中,保证right位置处的元素不是最大或最小的
 	int mid = GetMidIndex(a, left, right);
 	Swap(&a[mid], &a[right]);
-	int keyIndex = right;
+
+	int keyIndex = right;//keyIndex是key的下标
+
 	int cur = left;
-	int prev = left - 1;//prev是比key小的最后一个元素,prev+1是比key大的第一个元素
-	//cur从第一个位置找比key小的放到prev+1的位置处
+	int prev = left - 1;
+
 	while (cur < right)
+	{
+		//比key
+		if (a[cur] < a[keyIndex])
+		{
+			//若prev+1 == cur 则不需要交换,因为此时prev+1和cur位置相同元素也相同.
+			if (cur != prev+1)
+			{
+				Swap(&a[cur], &a[prev+1]);
+			}
+			cur++;
+			prev++;
+		}
+		else
+		{
+			cur++;
+		}
+	}
+	//可以看下这段代码的另一种写法
+	/*while (cur < right)
 	{
 		if (a[cur] < a[keyIndex] &&  ++prev != cur)
 		{
 			Swap(&a[cur], &a[prev]);
 		}
 		cur++;
-	}
+	}*/
+
+	//把key交换到prev+1位置处
 	Swap(&a[prev + 1], &a[keyIndex]);
 	return prev + 1;
 }
+
+//对 [left，right]区间的元素进行排序
 void QSort(int *a, int left, int right)
 {
-	//递归出口,只剩一个元素不排序
+	//left > right 说明待排序的区间不存在则不进行排序
+	//left = right 说明区间只有一个元素可以认为是有序也不行排序.
 	if (left >= right)
 	{
 		return;
 	}
-	int midIndex = PartSort3(a, left, right);
+
+	//先对[left,right]区间的元素单趟排序，找到key的正确位置
+	int midIndex = PartSort2(a, left, right);
+
+	//再对左区间[left,midIndex -1]的元素进行排序
 	QSort(a, left, midIndex - 1);
+
+	//最后对右区间[mid +1,right]的元素进行排序
 	QSort(a, midIndex + 1,right);
 }
 //快速排序
