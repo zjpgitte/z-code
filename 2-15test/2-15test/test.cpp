@@ -45,7 +45,7 @@ int* sortedSquares(int* nums, int numsSize, int* returnSize){
 		nums[i] *= nums[i];
 	}
 
-	int *arr = malloc(sizeof(int)*numsSize);
+	int *arr = (int*)malloc(sizeof(int)*numsSize);
 	int left = 0, right = numsSize - 1;
 	int i = numsSize - 1;
 	while (left <= right)
@@ -138,4 +138,31 @@ int lengthOfLastWord(char * s){
 
 
 
+}
+
+
+/**
+* Note: The returned array must be malloced, assume caller calls free().
+*/
+int* sortArrayByParity(int* A, int ASize, int* returnSize){
+	int left = 0, right = ASize - 1;
+	while (left < right)
+	{
+		while (left < right && A[left] % 2 == 0)
+		{
+			left++;
+		}
+		while (left < right && A[right] % 2 != 0)
+		{
+			right--;
+		}
+		int temp = A[left];
+		A[left] = A[right];
+		A[right] = temp;
+		left++;
+		right--;
+	}
+
+	*returnSize = ASize;
+	return A;
 }
