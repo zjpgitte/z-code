@@ -52,6 +52,7 @@ int compress(char* chars, int charsSize){
 			}
 			if (cur + 1 == behind)
 			{
+				cur++;
 				free(countC);
 				continue;
 			}

@@ -9,8 +9,11 @@ int main()
 	else
 		a++; b++;
 */
-	char s[] = "aaabbaa";
-	int n = compress(s, strlen(s));
+	char s[] = { '%', '%', '2', '2', '2', ')', ')', ')' };
+	
+	int size = sizeof(s) / sizeof(s[0]);
+
+	int n = compress(s, size);
 
 	printf("%s",s);
 
